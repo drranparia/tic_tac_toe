@@ -13,8 +13,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool oTurn = true;
   List<String> dispXO = ['', '', '', '', '', '', '', '', ''];
-  int OScore = 0;
-  int XScore = 0;
+  int oScore = 0;
+  int xScore = 0;
   int filledBox = 0;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                         height: 10,
                       ),
                       Text(
-                        OScore.toString(),
+                        oScore.toString(),
                         style: playerStats,
                       ),
                     ],
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                         height: 10,
                       ),
                       Text(
-                        XScore.toString(),
+                        xScore.toString(),
                         style: playerStats,
                       ),
                     ],
@@ -161,31 +161,45 @@ class _HomeState extends State<Home> {
       showDialogBox(dispXO[0]);
     }
     //2nd ROW
-    if (dispXO[3] == dispXO[4] && dispXO[3] == dispXO[5] && dispXO[3] != '') {
+    else if (dispXO[3] == dispXO[4] &&
+        dispXO[3] == dispXO[5] &&
+        dispXO[3] != '') {
       showDialogBox(dispXO[3]);
     }
     //3rd ROW
-    if (dispXO[6] == dispXO[7] && dispXO[6] == dispXO[8] && dispXO[6] != '') {
+    else if (dispXO[6] == dispXO[7] &&
+        dispXO[6] == dispXO[8] &&
+        dispXO[6] != '') {
       showDialogBox(dispXO[6]);
     }
     //1st COLUMN
-    if (dispXO[0] == dispXO[3] && dispXO[0] == dispXO[6] && dispXO[0] != '') {
+    else if (dispXO[0] == dispXO[3] &&
+        dispXO[0] == dispXO[6] &&
+        dispXO[0] != '') {
       showDialogBox(dispXO[0]);
     }
     //2nd COLUMN
-    if (dispXO[1] == dispXO[4] && dispXO[1] == dispXO[7] && dispXO[1] != '') {
+    else if (dispXO[1] == dispXO[4] &&
+        dispXO[1] == dispXO[7] &&
+        dispXO[1] != '') {
       showDialogBox(dispXO[1]);
     }
     //3rd COLUMN
-    if (dispXO[2] == dispXO[5] && dispXO[2] == dispXO[8] && dispXO[2] != '') {
+    else if (dispXO[2] == dispXO[5] &&
+        dispXO[2] == dispXO[8] &&
+        dispXO[2] != '') {
       showDialogBox(dispXO[2]);
     }
     //1st DIAGONAL
-    if (dispXO[0] == dispXO[4] && dispXO[0] == dispXO[8] && dispXO[0] != '') {
+    else if (dispXO[0] == dispXO[4] &&
+        dispXO[0] == dispXO[8] &&
+        dispXO[0] != '') {
       showDialogBox(dispXO[0]);
     }
     //2nd DIAGONAL
-    if (dispXO[2] == dispXO[4] && dispXO[2] == dispXO[6] && dispXO[2] != '') {
+    else if (dispXO[2] == dispXO[4] &&
+        dispXO[2] == dispXO[6] &&
+        dispXO[2] != '') {
       showDialogBox(dispXO[2]);
     }
 
@@ -223,7 +237,7 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Match Winner is:-  \'' + winner + '\''),
+            title: Text('Match Winner is:-  \' $winner \''),
             actions: [
               TextButton(
                   onPressed: () {
@@ -238,9 +252,9 @@ class _HomeState extends State<Home> {
           );
         });
     if (winner == 'O') {
-      OScore += 1;
-    } else {
-      XScore += 1;
+      oScore += 1;
+    } else if (winner == 'X') {
+      xScore += 1;
     }
   }
 
@@ -255,8 +269,9 @@ class _HomeState extends State<Home> {
 
   void restart() {
     setState(() {
-      OScore = 0;
-      XScore = 0;
+      oScore = 0;
+      xScore = 0;
+      oTurn = true;
     });
     clearBlocks();
   }
