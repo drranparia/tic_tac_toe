@@ -43,7 +43,7 @@ class _FourXFourState extends State<FourXFour> {
         elevation: 0.1,
         centerTitle: true,
         title: Text(
-          'Tic Tac Toe',
+          '4x4 Tic Tac Toe',
           style: appBarTitle,
         ),
       ),
