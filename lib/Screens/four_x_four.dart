@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/classes/colors.dart';
 
-import '../classes/textStyles.dart';
+import '../Constants/colors.dart';
+import '../Constants/sizeConst.dart';
+import '../Constants/textStyles.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class FourXFour extends StatefulWidget {
+  const FourXFour({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<FourXFour> createState() => _FourXFourState();
 }
 
-class _HomeState extends State<Home> {
+class _FourXFourState extends State<FourXFour> {
   bool oTurn = true;
-  List<String> dispXO = ['', '', '', '', '', '', '', '', ''];
+  List<String> dispXO = [
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+  ];
   int oScore = 0;
   int xScore = 0;
   int filledBox = 0;
@@ -30,9 +48,9 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Center(
-          child: Column(
-        children: [
-          Expanded(
+        child: Column(
+          children: [
+            Expanded(
               flex: 3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,9 +63,7 @@ class _HomeState extends State<Home> {
                         'Player\'O\'',
                         style: playerStats,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      spacerH10,
                       Text(
                         oScore.toString(),
                         style: playerStats,
@@ -61,9 +77,7 @@ class _HomeState extends State<Home> {
                         'Player\'X\'',
                         style: playerStats,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      spacerH10,
                       Text(
                         xScore.toString(),
                         style: playerStats,
@@ -71,66 +85,70 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ],
-              )),
-          Expanded(
-            flex: 7,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: GridView.builder(
-                  itemCount: 9,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-                  itemBuilder: ((context, index) {
-                    return InkWell(
-                      onTap: () {
-                        tapped(index);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AColor.grey,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            dispXO[index],
-                            // index.toString(),
-                            style: textStyle30White,
-                          ),
-                        ),
-                      ),
-                    );
-                  })),
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Colors.transparent,
-              child: Center(
-                child: SizedBox(
-                  height: 50,
-                  width: 200,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(AColor.white),
-                    ),
-                    onPressed: () {
-                      restart();
-                    },
-                    child: Center(
-                      child: Text(
-                        'Restart',
-                        style: buttonText,
+            Expanded(
+              flex: 7,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GridView.builder(
+                    itemCount: 16,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4),
+                    itemBuilder: ((context, index) {
+                      return InkWell(
+                        onTap: () {
+                          tapped(index);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AColor.grey,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              dispXO[index],
+                              // index.toString(),
+                              style: textStyle30White,
+                            ),
+                          ),
+                        ),
+                      );
+                    })),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                color: Colors.transparent,
+                child: Center(
+                  child: SizedBox(
+                    height: 50,
+                    width: 200,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(AColor.white),
+                      ),
+                      onPressed: () {
+                        restart();
+                      },
+                      child: Center(
+                        child: Text(
+                          'Restart',
+                          style: buttonText,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      )),
+          ],
+        ),
+      ),
     );
   }
 
@@ -157,54 +175,78 @@ class _HomeState extends State<Home> {
 
   void checkWinner() {
     //1st ROW
-    if (dispXO[0] == dispXO[1] && dispXO[0] == dispXO[2] && dispXO[0] != '') {
+    if (dispXO[0] == dispXO[1] &&
+        dispXO[0] == dispXO[2] &&
+        dispXO[0] == dispXO[3] &&
+        dispXO[0] != '') {
       showDialogBox(dispXO[0]);
     }
     //2nd ROW
-    else if (dispXO[3] == dispXO[4] &&
-        dispXO[3] == dispXO[5] &&
-        dispXO[3] != '') {
-      showDialogBox(dispXO[3]);
+    else if (dispXO[4] == dispXO[5] &&
+        dispXO[4] == dispXO[6] &&
+        dispXO[4] == dispXO[7] &&
+        dispXO[4] != '') {
+      showDialogBox(dispXO[4]);
     }
     //3rd ROW
-    else if (dispXO[6] == dispXO[7] &&
-        dispXO[6] == dispXO[8] &&
-        dispXO[6] != '') {
-      showDialogBox(dispXO[6]);
+    else if (dispXO[8] == dispXO[9] &&
+        dispXO[8] == dispXO[10] &&
+        dispXO[8] == dispXO[11] &&
+        dispXO[8] != '') {
+      showDialogBox(dispXO[8]);
+    }
+    //4th ROW
+    else if (dispXO[12] == dispXO[13] &&
+        dispXO[12] == dispXO[14] &&
+        dispXO[12] == dispXO[15] &&
+        dispXO[12] != '') {
+      showDialogBox(dispXO[12]);
     }
     //1st COLUMN
-    else if (dispXO[0] == dispXO[3] &&
-        dispXO[0] == dispXO[6] &&
+    else if (dispXO[0] == dispXO[4] &&
+        dispXO[0] == dispXO[8] &&
+        dispXO[0] == dispXO[12] &&
         dispXO[0] != '') {
       showDialogBox(dispXO[0]);
     }
     //2nd COLUMN
-    else if (dispXO[1] == dispXO[4] &&
-        dispXO[1] == dispXO[7] &&
+    else if (dispXO[1] == dispXO[5] &&
+        dispXO[1] == dispXO[9] &&
+        dispXO[1] == dispXO[13] &&
         dispXO[1] != '') {
       showDialogBox(dispXO[1]);
     }
     //3rd COLUMN
-    else if (dispXO[2] == dispXO[5] &&
-        dispXO[2] == dispXO[8] &&
+    else if (dispXO[2] == dispXO[6] &&
+        dispXO[2] == dispXO[10] &&
+        dispXO[2] == dispXO[14] &&
         dispXO[2] != '') {
       showDialogBox(dispXO[2]);
     }
+    //3rd COLUMN
+    else if (dispXO[3] == dispXO[7] &&
+        dispXO[3] == dispXO[11] &&
+        dispXO[3] == dispXO[15] &&
+        dispXO[3] != '') {
+      showDialogBox(dispXO[3]);
+    }
     //1st DIAGONAL
-    else if (dispXO[0] == dispXO[4] &&
-        dispXO[0] == dispXO[8] &&
+    else if (dispXO[0] == dispXO[5] &&
+        dispXO[0] == dispXO[10] &&
+        dispXO[0] == dispXO[15] &&
         dispXO[0] != '') {
       showDialogBox(dispXO[0]);
     }
     //2nd DIAGONAL
-    else if (dispXO[2] == dispXO[4] &&
-        dispXO[2] == dispXO[6] &&
-        dispXO[2] != '') {
-      showDialogBox(dispXO[2]);
+    else if (dispXO[3] == dispXO[6] &&
+        dispXO[3] == dispXO[9] &&
+        dispXO[3] == dispXO[12] &&
+        dispXO[3] != '') {
+      showDialogBox(dispXO[3]);
     }
 
     //DRAW
-    else if (filledBox == 9) {
+    else if (filledBox == 16) {
       showDrawDialogBox();
     }
   }
@@ -258,15 +300,6 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void clearBlocks() {
-    setState(() {
-      for (int i = 0; i < 9; i++) {
-        dispXO[i] = '';
-      }
-    });
-    filledBox = 0;
-  }
-
   void restart() {
     setState(() {
       oScore = 0;
@@ -274,5 +307,14 @@ class _HomeState extends State<Home> {
       oTurn = true;
     });
     clearBlocks();
+  }
+
+  void clearBlocks() {
+    setState(() {
+      for (int i = 0; i < 16; i++) {
+        dispXO[i] = '';
+      }
+    });
+    filledBox = 0;
   }
 }
